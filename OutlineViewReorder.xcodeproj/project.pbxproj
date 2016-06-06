@@ -11,6 +11,10 @@
 		A9B89A391D0341BD000587EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B89A381D0341BD000587EF /* ViewController.swift */; };
 		A9B89A3B1D0341BD000587EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9B89A3A1D0341BD000587EF /* Assets.xcassets */; };
 		A9B89A3E1D0341BD000587EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9B89A3C1D0341BD000587EF /* Main.storyboard */; };
+		A9B89A461D034354000587EF /* OutlineDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B89A451D034354000587EF /* OutlineDataSource.swift */; };
+		A9B89A481D034363000587EF /* OutlineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B89A471D034363000587EF /* OutlineDelegate.swift */; };
+		A9B89A4A1D034498000587EF /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B89A491D034498000587EF /* TestData.swift */; };
+		A9B89A4E1D038CDB000587EF /* OutlineItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B89A4D1D038CDB000587EF /* OutlineItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +24,10 @@
 		A9B89A3A1D0341BD000587EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9B89A3D1D0341BD000587EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A9B89A3F1D0341BD000587EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9B89A451D034354000587EF /* OutlineDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineDataSource.swift; sourceTree = "<group>"; };
+		A9B89A471D034363000587EF /* OutlineDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineDelegate.swift; sourceTree = "<group>"; };
+		A9B89A491D034498000587EF /* TestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		A9B89A4D1D038CDB000587EF /* OutlineItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +62,10 @@
 			children = (
 				A9B89A361D0341BD000587EF /* AppDelegate.swift */,
 				A9B89A381D0341BD000587EF /* ViewController.swift */,
+				A9B89A451D034354000587EF /* OutlineDataSource.swift */,
+				A9B89A471D034363000587EF /* OutlineDelegate.swift */,
+				A9B89A4D1D038CDB000587EF /* OutlineItemView.swift */,
+				A9B89A491D034498000587EF /* TestData.swift */,
 				A9B89A3A1D0341BD000587EF /* Assets.xcassets */,
 				A9B89A3C1D0341BD000587EF /* Main.storyboard */,
 				A9B89A3F1D0341BD000587EF /* Info.plist */,
@@ -132,7 +144,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9B89A391D0341BD000587EF /* ViewController.swift in Sources */,
+				A9B89A461D034354000587EF /* OutlineDataSource.swift in Sources */,
+				A9B89A4E1D038CDB000587EF /* OutlineItemView.swift in Sources */,
 				A9B89A371D0341BD000587EF /* AppDelegate.swift in Sources */,
+				A9B89A4A1D034498000587EF /* TestData.swift in Sources */,
+				A9B89A481D034363000587EF /* OutlineDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
