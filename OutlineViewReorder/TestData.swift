@@ -71,6 +71,7 @@ class TestData
         items.append(folder)
     }
 
+    // Moves the items in a way that is compatible with NSOutlineView's method of the same name
     func moveItemAtIndex(fromIndex: Int, inParent oldParent: FolderItem?, toIndex: Int, inParent newParent: FolderItem?)
     {
         var removedItem:BaseItem

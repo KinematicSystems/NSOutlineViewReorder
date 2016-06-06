@@ -8,7 +8,7 @@
 
 
 import Cocoa
-let PASTEBOARD_TYPE = "com.kinematicsystems.outline.item"
+let REORDER_PASTEBOARD_TYPE = "com.kinematicsystems.outline.item"
 
 extension ViewController: NSOutlineViewDataSource, NSPasteboardItemDataProvider {
     
@@ -56,13 +56,13 @@ extension ViewController: NSOutlineViewDataSource, NSPasteboardItemDataProvider 
     // MARK: Drag & Drop
     func outlineView(outlineView: NSOutlineView, pasteboardWriterForItem item: AnyObject) -> NSPasteboardWriting? {
         let pbItem:NSPasteboardItem = NSPasteboardItem()
-        pbItem.setDataProvider(self, forTypes: [PASTEBOARD_TYPE])
+        pbItem.setDataProvider(self, forTypes: [REORDER_PASTEBOARD_TYPE])
         return pbItem
     }
     
     func outlineView(outlineView: NSOutlineView, draggingSession session: NSDraggingSession, willBeginAtPoint screenPoint: NSPoint, forItems draggedItems: [AnyObject]) {
         draggedNode = draggedItems[0]
-        session.draggingPasteboard.setData(NSData(), forType: PASTEBOARD_TYPE)
+        session.draggingPasteboard.setData(NSData(), forType: REORDER_PASTEBOARD_TYPE)
     }
     
     func outlineView(outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: AnyObject?, proposedChildIndex index: Int) -> NSDragOperation {
@@ -112,7 +112,7 @@ extension ViewController: NSOutlineViewDataSource, NSPasteboardItemDataProvider 
         
         debugPrint("move src:\(srcItem.name) dest:\(destItem?.name) destIndex:\(index) oldIndex:\(oldIndex) srcParent:\(parentItem?.name) toIndex:\(toIndex) toParent:\(destItem?.name) childIndex:\(index)", terminator: "")
         
-        if (toIndex == NSOutlineViewDropOnItemIndex)
+        if (toIndex == NSOutlineViewDropOnItemIndex) // This should never happen, prevented in validateDrop
         {
             toIndex = 0
         }

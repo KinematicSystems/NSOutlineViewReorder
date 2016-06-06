@@ -21,9 +21,8 @@ class ViewController: NSViewController {
         folderImage.size = NSSize(width: 16, height: 16)
         itemImage.size = NSSize(width: 16, height: 16)
 
-        // Do any additional setup after loading the view.
         // Register for the dropped object types we can accept.
-        theOutline.registerForDraggedTypes([PASTEBOARD_TYPE])
+        theOutline.registerForDraggedTypes([REORDER_PASTEBOARD_TYPE])
         
         // Disable dragging items from our view to other applications.
         theOutline.setDraggingSourceOperationMask(NSDragOperation.None, forLocal: false)
@@ -42,7 +41,5 @@ class ViewController: NSViewController {
         testData = TestData()
         theOutline.reloadData()
     }
-    
-
 }
 

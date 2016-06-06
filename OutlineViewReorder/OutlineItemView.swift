@@ -9,5 +9,5 @@
 import Cocoa
 
 class OutlineItemView: NSTableCellView {
-        // Base class has text and image cells
+  // Base class has text and image cells
 }
