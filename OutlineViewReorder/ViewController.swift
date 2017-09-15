@@ -10,8 +10,8 @@ import Cocoa
 
 class ViewController: NSViewController {
     @IBOutlet weak var theOutline: NSOutlineView!
-    var folderImage = NSWorkspace.sharedWorkspace().iconForFileType(NSFileTypeForHFSTypeCode(OSType(kGenericFolderIcon)))
-    var itemImage = NSWorkspace.sharedWorkspace().iconForFileType(NSFileTypeForHFSTypeCode(OSType(kGenericDocumentIcon)))
+    var folderImage = NSWorkspace.shared().icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kGenericFolderIcon)))
+    var itemImage = NSWorkspace.shared().icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kGenericDocumentIcon)))
 
     var testData = TestData()
     var draggedNode:AnyObject? = nil
@@ -22,22 +22,22 @@ class ViewController: NSViewController {
         itemImage.size = NSSize(width: 16, height: 16)
 
         // Register for the dropped object types we can accept.
-        theOutline.registerForDraggedTypes([REORDER_PASTEBOARD_TYPE])
+        theOutline.register(forDraggedTypes: [REORDER_PASTEBOARD_TYPE])
         
         // Disable dragging items from our view to other applications.
-        theOutline.setDraggingSourceOperationMask(NSDragOperation.None, forLocal: false)
+        theOutline.setDraggingSourceOperationMask(NSDragOperation(), forLocal: false)
         
         // Enable dragging items within and into our view.
-        theOutline.setDraggingSourceOperationMask(NSDragOperation.Every, forLocal: true)
+        theOutline.setDraggingSourceOperationMask(NSDragOperation.every, forLocal: true)
     }
 
-    override var representedObject: AnyObject? {
+    override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
         }
     }
 
-    @IBAction func undo(sender: AnyObject) {
+    @IBAction func undo(_ sender: AnyObject) {
         testData = TestData()
         theOutline.reloadData()
     }
