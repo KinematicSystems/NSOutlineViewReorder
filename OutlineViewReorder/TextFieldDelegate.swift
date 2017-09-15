@@ -9,11 +9,11 @@
 import Cocoa
 
 extension ViewController: NSTextFieldDelegate {
-    override func controlTextDidEndEditing(obj: NSNotification) {
+    override func controlTextDidEndEditing(_ obj: Notification) {
         //printDebug("text edit end \(obj.debugDescription)");
         let textField = obj.object as! NSTextField
-        let row = theOutline.rowForView(textField)
-        let item = theOutline.itemAtRow(row)
+        let row = theOutline.row(for: textField)
+        let item = theOutline.item(atRow: row)
         
         let newName:String = textField.stringValue
         

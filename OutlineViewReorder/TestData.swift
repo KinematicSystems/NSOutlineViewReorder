@@ -72,25 +72,25 @@ class TestData
     }
 
     // Moves the items in a way that is compatible with NSOutlineView's method of the same name
-    func moveItemAtIndex(fromIndex: Int, inParent oldParent: FolderItem?, toIndex: Int, inParent newParent: FolderItem?)
+    func moveItemAtIndex(_ fromIndex: Int, inParent oldParent: FolderItem?, toIndex: Int, inParent newParent: FolderItem?)
     {
         var removedItem:BaseItem
         if oldParent == nil
         {
-            removedItem = self.items.removeAtIndex(fromIndex)
+            removedItem = self.items.remove(at: fromIndex)
         }
         else
         {
-            removedItem = oldParent!.items.removeAtIndex(fromIndex)
+            removedItem = oldParent!.items.remove(at: fromIndex)
         }
         
         if newParent == nil
         {
-            self.items.insert(removedItem, atIndex: toIndex)
+            self.items.insert(removedItem, at: toIndex)
         }
         else
         {
-            newParent!.items.insert(removedItem as! TestItem, atIndex: toIndex)
+            newParent!.items.insert(removedItem as! TestItem, at: toIndex)
         }
         
     }
