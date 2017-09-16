@@ -12,7 +12,7 @@ let REORDER_PASTEBOARD_TYPE = "com.kinematicsystems.outline.item"
 
 extension ViewController: NSOutlineViewDataSource, NSPasteboardItemDataProvider {
     
-    func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
+    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         
         if item == nil
         {
@@ -26,7 +26,7 @@ extension ViewController: NSOutlineViewDataSource, NSPasteboardItemDataProvider 
         return 0
     }
     
-    func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
+    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         if item == nil
         {
             return testData.items[index]
@@ -39,12 +39,12 @@ extension ViewController: NSOutlineViewDataSource, NSPasteboardItemDataProvider 
         return "BAD ITEM"
     }
     
-    func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
+    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         return (item is FolderItem)
     }
     
     
-    func outlineView(outlineView: NSOutlineView, objectValueForTableColumn: NSTableColumn?, byItem:AnyObject?) -> AnyObject? {
+    func outlineView(_ outlineView: NSOutlineView, objectValueFor objectValueForTableColumn: NSTableColumn?, byItem:Any?) -> Any? {
         if let item = byItem as? BaseItem
         {
             return item.name
@@ -54,19 +54,19 @@ extension ViewController: NSOutlineViewDataSource, NSPasteboardItemDataProvider 
     }
     
     // MARK: Drag & Drop
-    func outlineView(outlineView: NSOutlineView, pasteboardWriterForItem item: AnyObject) -> NSPasteboardWriting? {
+    func outlineView(_ outlineView: NSOutlineView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {
         let pbItem:NSPasteboardItem = NSPasteboardItem()
         pbItem.setDataProvider(self, forTypes: [REORDER_PASTEBOARD_TYPE])
         return pbItem
     }
     
-    func outlineView(outlineView: NSOutlineView, draggingSession session: NSDraggingSession, willBeginAtPoint screenPoint: NSPoint, forItems draggedItems: [AnyObject]) {
-        draggedNode = draggedItems[0]
-        session.draggingPasteboard.setData(NSData(), forType: REORDER_PASTEBOARD_TYPE)
+    func outlineView(_ outlineView: NSOutlineView, draggingSession session: NSDraggingSession, willBeginAt screenPoint: NSPoint, forItems draggedItems: [Any]) {
+        draggedNode = draggedItems[0] as AnyObject?
+        session.draggingPasteboard.setData(Data(), forType: REORDER_PASTEBOARD_TYPE)
     }
     
-    func outlineView(outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: AnyObject?, proposedChildIndex index: Int) -> NSDragOperation {
-        var retVal:NSDragOperation = NSDragOperation.None
+    func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
+        var retVal:NSDragOperation = NSDragOperation()
         var itemName = "nilItem"
         
         let baseItem = item as? BaseItem
@@ -78,26 +78,26 @@ extension ViewController: NSOutlineViewDataSource, NSPasteboardItemDataProvider 
 
         // proposedItem is the item we are dropping on not the item we are dragging
         // - If dragging a set target item must be nil
-        if (item !== draggedNode && index != NSOutlineViewDropOnItemIndex)
+        if (item as AnyObject? !== draggedNode && index != NSOutlineViewDropOnItemIndex)
         {
             if let _ = draggedNode as? FolderItem
             {
                 if (item == nil)
                 {
-                    retVal = NSDragOperation.Generic
+                    retVal = NSDragOperation.generic
                 }
             }
             else if let _ = draggedNode as? TestItem
             {
-                retVal = NSDragOperation.Generic
+                retVal = NSDragOperation.generic
             }
         }
         
-        debugPrint("validateDrop targetItem:\(itemName) childIndex:\(index) returning: \(retVal != NSDragOperation.None)")
+        debugPrint("validateDrop targetItem:\(itemName) childIndex:\(index) returning: \(retVal != NSDragOperation())")
         return retVal
     }
     
-    func outlineView(outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: AnyObject?, childIndex index: Int) -> Bool {
+    func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
         var retVal:Bool = false
         if !(draggedNode is BaseItem)
         {
@@ -106,8 +106,8 @@ extension ViewController: NSOutlineViewDataSource, NSPasteboardItemDataProvider 
         
         let srcItem = draggedNode as! BaseItem
         let destItem:FolderItem? = item as? FolderItem
-        let parentItem:FolderItem? = outlineView.parentForItem(srcItem) as? FolderItem
-        let oldIndex = outlineView.childIndexForItem(srcItem)
+        let parentItem:FolderItem? = outlineView.parent(forItem: srcItem) as? FolderItem
+        let oldIndex = outlineView.childIndex(forItem: srcItem)
         var toIndex = index
         
         debugPrint("move src:\(srcItem.name) dest:\(destItem?.name) destIndex:\(index) oldIndex:\(oldIndex) srcParent:\(parentItem?.name) toIndex:\(toIndex) toParent:\(destItem?.name) childIndex:\(index)", terminator: "")
@@ -128,7 +128,7 @@ extension ViewController: NSOutlineViewDataSource, NSPasteboardItemDataProvider 
         else if oldIndex != toIndex || parentItem !== destItem
         {
             testData.moveItemAtIndex(oldIndex, inParent: parentItem, toIndex: toIndex, inParent: destItem)
-            outlineView.moveItemAtIndex(oldIndex, inParent: parentItem, toIndex: toIndex, inParent: destItem)
+            outlineView.moveItem(at: oldIndex, inParent: parentItem, to: toIndex, inParent: destItem)
             retVal = true
         }
         
@@ -140,13 +140,13 @@ extension ViewController: NSOutlineViewDataSource, NSPasteboardItemDataProvider 
         return retVal
     }
     
-    func outlineView(outlineView: NSOutlineView, draggingSession session: NSDraggingSession, endedAtPoint screenPoint: NSPoint, operation: NSDragOperation) {
+    func outlineView(_ outlineView: NSOutlineView, draggingSession session: NSDraggingSession, endedAt screenPoint: NSPoint, operation: NSDragOperation) {
         //debugPrint("Drag session ended")
         self.draggedNode = nil
     }
     
     // MARK: NSPasteboardItemDataProvider
-    func pasteboard(pasteboard: NSPasteboard?, item: NSPasteboardItem, provideDataForType type: String)
+    func pasteboard(_ pasteboard: NSPasteboard?, item: NSPasteboardItem, provideDataForType type: String)
     {
         let s = "Outline Pasteboard Item"
         item.setString(s, forType: type)
