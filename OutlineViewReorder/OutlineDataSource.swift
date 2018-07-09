@@ -109,9 +109,16 @@ extension ViewController: NSOutlineViewDataSource, NSPasteboardItemDataProvider 
         let parentItem:FolderItem? = outlineView.parent(forItem: srcItem) as? FolderItem
         let oldIndex = outlineView.childIndex(forItem: srcItem)
         var toIndex = index
-        
-        debugPrint("move src:\(srcItem.name) dest:\(destItem!.name) destIndex:\(index) oldIndex:\(oldIndex) srcParent:\(parentItem!.name) toIndex:\(toIndex) toParent:\(destItem!.name) childIndex:\(index)", terminator: "")
-        
+
+        if destItem != nil && parentItem != nil
+        {
+            debugPrint("move src:\(srcItem.name) dest:\(destItem!.name) destIndex:\(index) oldIndex:\(oldIndex) srcParent:\(parentItem!.name) toIndex:\(toIndex) toParent:\(destItem!.name) childIndex:\(index)", terminator: "")
+        }
+        else
+        {
+            debugPrint("destination or parent is nil")
+        }
+
         if (toIndex == NSOutlineViewDropOnItemIndex) // This should never happen, prevented in validateDrop
         {
             toIndex = 0
