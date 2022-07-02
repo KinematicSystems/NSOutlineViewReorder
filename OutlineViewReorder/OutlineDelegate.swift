@@ -11,7 +11,7 @@ import Cocoa
 extension ViewController: NSOutlineViewDelegate {
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        let cell = outlineView.make(withIdentifier: "OutlineColItem", owner: self) as! OutlineItemView
+        let cell = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "OutlineColItem"), owner: self) as! OutlineItemView
         
         cell.textField!.delegate = self
         

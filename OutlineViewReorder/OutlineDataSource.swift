@@ -8,10 +8,10 @@
 
 
 import Cocoa
-let REORDER_PASTEBOARD_TYPE = "com.kinematicsystems.outline.item"
+let REORDER_PASTEBOARD_TYPE = NSPasteboard.PasteboardType(rawValue: "com.kinematicsystems.outline.item")
 
 extension ViewController: NSOutlineViewDataSource, NSPasteboardItemDataProvider {
-    
+
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         
         if item == nil
@@ -152,11 +152,10 @@ extension ViewController: NSOutlineViewDataSource, NSPasteboardItemDataProvider 
         self.draggedNode = nil
     }
     
+    
     // MARK: NSPasteboardItemDataProvider
-    func pasteboard(_ pasteboard: NSPasteboard?, item: NSPasteboardItem, provideDataForType type: String)
-    {
+    func pasteboard(_ pasteboard: NSPasteboard?, item: NSPasteboardItem, provideDataForType type: NSPasteboard.PasteboardType) {
         let s = "Outline Pasteboard Item"
         item.setString(s, forType: type)
     }
-    
 }
