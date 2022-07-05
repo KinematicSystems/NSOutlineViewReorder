@@ -10,8 +10,8 @@ import Cocoa
 
 class ViewController: NSViewController {
     @IBOutlet weak var theOutline: NSOutlineView!
-    var folderImage = NSWorkspace.shared().icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kGenericFolderIcon)))
-    var itemImage = NSWorkspace.shared().icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kGenericDocumentIcon)))
+    var folderImage = NSWorkspace.shared.icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kGenericFolderIcon)))
+    var itemImage = NSWorkspace.shared.icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kGenericDocumentIcon)))
 
     var testData = TestData()
     var draggedNode:AnyObject? = nil
@@ -22,7 +22,7 @@ class ViewController: NSViewController {
         itemImage.size = NSSize(width: 16, height: 16)
 
         // Register for the dropped object types we can accept.
-        theOutline.register(forDraggedTypes: [REORDER_PASTEBOARD_TYPE])
+        theOutline.registerForDraggedTypes([REORDER_PASTEBOARD_TYPE])
         
         // Disable dragging items from our view to other applications.
         theOutline.setDraggingSourceOperationMask(NSDragOperation(), forLocal: false)
